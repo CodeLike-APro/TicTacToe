@@ -120,6 +120,33 @@ mode2.classList.add("hide");
 
 let theme = "dark";
 
+theme = localStorage.getItem("theme") || "dark";
+
+// Apply the saved theme right away
+if (theme === "light") {
+  mode1.classList.add("hide");
+  mode2.classList.remove("hide");
+  body.classList.add("darkItDown");
+  container.classList.add("boxShadow");
+  game.classList.add("boxShadow");
+  boxes.forEach((box) => {
+    if (box.innerText === "") {
+      box.classList.add("darkBoxes");
+    }
+  });
+  status01.classList.add("boxShadow");
+} else {
+  mode2.classList.add("hide");
+  mode1.classList.remove("hide");
+  body.classList.remove("darkItDown");
+  container.classList.remove("boxShadow");
+  game.classList.remove("boxShadow");
+  boxes.forEach((box) => {
+    box.classList.remove("darkBoxes");
+  });
+  status01.classList.remove("boxShadow");
+}
+
 mode.addEventListener("click", () => {
   if (theme === "dark") {
     mode1.classList.add("hide");
@@ -148,6 +175,7 @@ mode.addEventListener("click", () => {
     status01.classList.remove("boxShadow");
     theme = "dark";
   }
+  localStorage.setItem("theme", theme);
   mode.classList.add("mode-toggle");
 
   setTimeout(() => {
